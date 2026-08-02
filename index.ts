@@ -23,9 +23,9 @@ interface Options {
 	cyclesFix: boolean;
 }
 
-const richTypes = ['Date', 'RegExp', 'String', 'Number'];
+const richTypes = ["Date", "RegExp", "String", "Number"];
 
-const temporalTypes = Object.getOwnPropertyNames(globalThis.Temporal||{});
+const temporalTypes = Object.getOwnPropertyNames(globalThis.Temporal || {});
 
 export default function diff(
 	obj: Record<string, any> | any[],
@@ -85,12 +85,10 @@ export default function diff(
 			}
 		} else if (
 			!(
-				Object.is(value, newValue) /* treat nulls as equivalent */ ||
-				(areCompatibleObjects &&
-					temporalTypes.includes(objConstructor) &&
+				Object.is(value, newValue) ||
+				(temporalTypes.includes(objConstructor) &&
 					String(value) === String(newValue)) ||
-				(areCompatibleObjects &&
-					richTypes.includes(objConstructor) &&
+				(richTypes.includes(objConstructor) &&
 					(isNaN(value) ? value + "" === newValue + "" : +value === +newValue))
 			)
 		) {
