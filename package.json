@@ -12,7 +12,8 @@
 		"build": "tsc --module CommonJS && shx mv \"dist/index.js\" \"dist/index.cjs\" && shx mv \"dist/index.d.ts\" \"dist/index.d.cts\" && tsc --module es2020 && prettier -w dist/*",
 		"test": "npm run build && node --harmony-temporal --test ./tests/*",
 		"bench": "npm run build && node --expose-gc bench.js",
-		"prepublish": "npm run build"
+		"prepublish": "npm run build",
+		"size": "npm run build && terser dist/index.js --compress --mangle --module | gzip -c | wc -c"
 	},
 	"keywords": [
 		"diff",
@@ -31,6 +32,7 @@
 		"picocolors": "^1.1.1",
 		"prettier": "^3.4.1",
 		"shx": "^0.4.0",
+		"terser": "^5.49.0",
 		"typescript": "^5.7.2"
 	},
 	"type": "module",
